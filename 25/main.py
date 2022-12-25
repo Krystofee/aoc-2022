@@ -31,21 +31,14 @@ def int_to_snafu_digit(digit):
         return str(digit)
 
 
-def find_snafu_from_int_dfs(start, remaining, current_root):
+def int_to_snafu_dfs(start, remaining, current_root):
     current_pow = 5 ** current_root
-
-    # Prevent going too high
-    if start < remaining:
-        return None
 
     if current_root == 0:
         if remaining in SNAFU_NUMBERS:
             return str(remaining)
         else:
             return None
-
-    if remaining == 0:
-        return "0" * current_root
 
     for n in SNAFU_NUMBERS:
         new_remaining = remaining - n * current_pow
@@ -54,13 +47,13 @@ def find_snafu_from_int_dfs(start, remaining, current_root):
         if new_remaining != 0 and int(math.log(abs(new_remaining), 5)) > current_root - 1:
             continue
 
-        result = find_snafu_from_int_dfs(start, new_remaining, current_root - 1)
+        result = int_to_snafu_dfs(start, new_remaining, current_root - 1)
         if result is not None:
             return int_to_snafu_digit(n) + result
 
 
 def int_to_snafu(i):
-    return find_snafu_from_int_dfs(i, i, int(math.log(i, 5)))
+    return int_to_snafu_dfs(i, i, int(math.log(i, 5)))
 
 
 with open("input.txt", "r") as file:
