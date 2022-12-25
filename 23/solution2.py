@@ -1,6 +1,10 @@
 import math
+import sys
 from collections import defaultdict
 from typing import Tuple
+
+sys.setrecursionlimit(99999)
+
 
 # proposed_moves = {
 #     (x, y): [move],
