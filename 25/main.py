@@ -42,7 +42,6 @@ def find_snafu_from_int_dfs(start, remaining, current_root):
         if remaining in SNAFU_NUMBERS:
             return str(remaining)
         else:
-            print("ERROR", remaining)
             return None
 
     if remaining == 0:
@@ -71,10 +70,5 @@ sum = 0
 for line in lines:
     sum += snafu_to_int(line.strip())
 
-print("SUM", sum)
-
-max_root = math.log(sum, 5)
-
-print("FINDING")
 x = int_to_snafu(sum)
-print("DONE", x, "check=", snafu_to_int(x))
+print("DONE", x, "(sum check=", snafu_to_int(x), ")")
